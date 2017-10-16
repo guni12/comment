@@ -24,7 +24,7 @@ Install using composer and then integrate the module with your Anax installation
 ### Install with composer
 
 ```
-composer require anax/comment
+composer require guni12/comment
 ```
 
 
