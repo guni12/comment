@@ -121,7 +121,7 @@ class UpdateCommForm extends FormModel
         $comm->email = $userdetails["email"];
         $comm->save();
 
-        $back = (int)$this->form->value("parentid") > 0 ? "/view-one/" . $this->form->value("parentid") : $this->form->value("id");
+        $back = (int)$this->form->value("parentid") > 0 ? "/view-one/" . $this->form->value("parentid") : "/view-one/" . $this->form->value("id");
 
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm" . $back);

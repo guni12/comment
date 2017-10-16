@@ -29,9 +29,9 @@ class ShowOneService
         $this->di = $di;
         $this->comment = $this->getItemDetails($id);
 
-        $sql = "SELECT * FROM Comm WHERE parentid = ?";
+        $where = "parentid = ?";
         $params = [$id];
-        $this->comments = $this->getParentDetails($sql, $params);
+        $this->comments = $this->getParentDetails($where, $params);
 
         $session = $this->di->get("session");
         $this->sess = $session->get("user");
@@ -61,11 +61,11 @@ class ShowOneService
      *
      * @return Book
      */
-    public function getParentDetails($sql, $params)
+    public function getParentDetails($where, $params)
     {
         $comm = new Comm();
         $comm->setDb($this->di->get("db"));
-        return $comm->findAllWhere($sql, $params);
+        return $comm->findAllWhere($where, $params);
     }
 
 
