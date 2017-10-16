@@ -13,15 +13,36 @@
             "role": "Developer"
         }
     ],
+        "require": {
+        "php": ">=5.6",
+        "comment": "comment-master",
+        "anax/request": "^1.0",
+        "anax/url": "^1.0",
+        "anax/router": "^1.0",
+        "anax/response": "^1.0",
+        "anax/view": "^1.0",
+        "anax/session": "^1.0",
+        "anax/configure": "^1.0",
+        "anax/textfilter": "^1.0",
+        "symfony/yaml": "^3.3",
+        "mos/cimage": "^0.7.19",
+        "anax/di": "^1.0",
+        "anax/page": "^1.0",
+        "anax/htmlform": "^1.0",
+        "anax/database": "^1.1"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/guni12/comment.git"
+        }
+    ],
     "support": {
-        "issues": "https://github.com/canax/comment/issues"
+        "issues": "https://github.com/guni12/comment/issues"
     },
     "autoload": {
         "psr-4": { 
             "Anax\\": "src/"
         }
-    },
-    "require": {
-        "php": ">=5.6"
     }
 }
