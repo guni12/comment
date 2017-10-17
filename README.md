@@ -51,7 +51,7 @@ rsync -av vendor/anax/comment/view/comm/crud* view/comm/crud
 ```
 
 
-You might want to change namespace and place the src-files in your own src-files area.
+You might want to change namespace and place the src-files amongst your own src-files.
 
 
 
