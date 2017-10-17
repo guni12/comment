@@ -31,23 +31,24 @@ composer require guni12/comment
 ### Router files
 
 ```
-rsync -av vendor/anax/comment/config/route/commController.php config/route
+rsync -av vendor/guni12/comment/config/route/commController.php config/route
 ```
 
-You need to include the router file in your router configuration `config/route.php`. There is a sample you can use in `vendor/anax/comment/config/route.php`.
+You need to include the router file in your router configuration `config/route.php`. There is a sample you can use in `vendor/guni12/comment/config/route.php`.
 
 
 
 ### DI services
 
-You need to add the services di configuration `config/di.php`. There is a sample you can use in `vendor/anax/comment/config/di.php`.
+You need to add the services di configuration `config/di.php`. There is a sample you can use in `vendor/guni12/comment/config/di.php`.
 
 
 ### view files
 You need some view files
+Perhaps you need to create the directory first
 
 ```
-rsync -av vendor/anax/comment/view/comm/crud* view/comm/crud
+rsync -av vendor/guni12/comment/view/comm/crud* view/comm
 ```
 
 
