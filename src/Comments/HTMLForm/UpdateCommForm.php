@@ -107,7 +107,8 @@ class UpdateCommForm extends FormModel
         $userController = $this->di->get("userController");
         $userdetails = $userController->getOne($this->form->value("sessid"));
 
-        $comment = $textfilter->parse($this->form->value("comment"), ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+        $parses = ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"];
+        $comment = $textfilter->parse($this->form->value("comment"), $parses);
         $comment->frontmatter['title'] = $this->form->value("title");
         $comment = json_encode($comment);
 
@@ -121,7 +122,9 @@ class UpdateCommForm extends FormModel
         $comm->email = $userdetails["email"];
         $comm->save();
 
-        $back = (int)$this->form->value("parentid") > 0 ? "/view-one/" . $this->form->value("parentid") : "/view-one/" . $this->form->value("id");
+        $parentid = (int)$this->form->value("parentid");
+
+        $back = $parentid > 0 ? "/view-one/" . $parentid : "/view-one/" . $this->form->value("id");
 
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm" . $back);

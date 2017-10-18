@@ -71,7 +71,8 @@ class CreateCommForm extends FormModel
 
         $userController = $this->di->get("userController");
         $userdetails = $userController->getOne($this->form->value("id"));
-        $comment = $textfilter->parse($this->form->value("comment"), ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
+        $parses = ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"];
+        $comment = $textfilter->parse($this->form->value("comment"), $parses);
         $comment->frontmatter['title'] = $this->form->value("title");
         //var_dump($comment);
         $comment = json_encode($comment);

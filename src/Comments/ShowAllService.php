@@ -120,7 +120,9 @@ class ShowAllService
             if ($isadmin == true) {
                 $showid = '(' . $value->id . '): ';
             }
-            $html .= '<h4><a href="' . $viewone . '/' . $value->id . '">' . $showid . ' ' . $value->title . '</a></h4><p>' . $value->created . ' ' . $value->email . ' ' . $gravatar . ' ' . $extra . '</p><hr />';
+            $html .= '<h4><a href="' . $viewone . '/' . $value->id . '">';
+            $html .= $showid . ' ' . $value->title . '</a></h4><p>';
+            $html .= $value->created . ' ' . $value->email . ' ' . $gravatar . ' ' . $extra . '</p><hr />';
         }
         
         $html .= '</div></div>';
