@@ -3,6 +3,7 @@
  * Routes for controller.
  */
 return [
+    "mount" => "comm",
     "routes" => [
         [
             "info" => "Controller index.",

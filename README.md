@@ -33,18 +33,20 @@ composer require guni12/comment
 rsync -av vendor/guni12/comment/config/route/commController.php config/route
 ```
 
-You need to include the router file in your router configuration `config/route.php`. There is a sample you can use in `vendor/guni12/comment/config/route.php`.
-
-
 
 ### DI services
 
-You need to add the services di configuration `config/di.php`. There is a sample you can use in `vendor/guni12/comment/config/di.php`.
+Add the services di configuration.
+Make sure you have the directory `config/di`
+
+```
+rsync -a vendor/guni12/comment/config/di.php config/di/comment.php
+```
 
 
-### view files
-You need some view files
-Perhaps you need to create the directory first
+### View files
+
+You have the directory `view/comm`
 
 ```
 rsync -av vendor/guni12/comment/view/comm/crud* view/comm
