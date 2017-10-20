@@ -30,8 +30,11 @@ class Comm extends ActiveRecordModel
     public $updated;
 
 
-    public function getGravatar($email, $size = 20, $dim = 'mm', $rad = 'g', $img = false, $atts = array())
+    public function getGravatar($email, $img = false, $atts = array())
     {
+        $size = 20;
+        $dim = 'mm';
+        $rad = 'g';
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
         $url .= "?s=$size&d=$dim&r=$rad";

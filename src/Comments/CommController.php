@@ -93,6 +93,18 @@ class CommController implements
 
 
     /**
+    *
+    * @return sessionobject
+    */
+    public function getSess()
+    {
+        $session = $this->di->get("session");
+        $sess = $session->get("user");
+        return $sess;
+    }
+
+
+    /**
      * Handler with form to delete an item.
      *
      * @return void
@@ -100,9 +112,7 @@ class CommController implements
     public function getPostDeleteItem($id)
     {
         $title      = "Ta bort ett inlägg";
-
-        $session = $this->di->get("session");
-        $sess = $session->get("user");
+        $sess = $this->getSess();
 
         if ($sess) {
             $form       = new DeleteCommForm($this->di, $id);
@@ -154,8 +164,7 @@ class CommController implements
     {
         $title      = "Uppdatera ditt inlägg";
 
-        $session = $this->di->get("session");
-        $sess = $session->get("user");
+        $sess = $this->getSess();
 
         if ($sess) {
             $form       = new UpdateCommForm($this->di, $id, $sess['id']);

@@ -1,6 +1,6 @@
 <?php
-define("FIND_DB_PATH", realpath(__DIR__ . "/../../"));
-$find_db = FIND_DB_PATH . "/data/db.sqlite";
+
+$find_db = realpath(__DIR__ . "/../../") . "/data/db.sqlite";
 return [
     "dsn"             => "sqlite:" . $find_db,
     "username"        => null,

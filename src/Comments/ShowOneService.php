@@ -124,13 +124,13 @@ class ShowOneService
      * If param met, returns string with edit-links
      * @param boolean $isadmin
      * @param object $item
-     * @param string $update
      * @param string $del
      * @return string htmlcode
      */
-    public function getCanEdit(Comm $item, $isadmin, $update, $del)
+    public function getCanEdit(Comm $item, $isadmin, $del)
     {
         $canedit = "";
+        $update = $this->setUrlCreator("comm/update");
         if ($item->userid == $this->sess['id'] || $isadmin) {
             $canedit = '<br /><a href="' . $update . '/' . $item->id . '">Redigera</a>';
             $canedit .= ' | <a href="' . $del . '/' . $item->id . '">Ta bort inlägget</a></p>';
@@ -165,13 +165,14 @@ class ShowOneService
      *
      * @param boolean $isadmin
      * @param string $userid
-     * @param string $update, link
+     * @param string $commid
      * @param string $htmlcomment, link
      *
      * @return string htmlcode
      */
-    public function getEdit($isadmin, $userid, $update, $commid, $htmlcomment)
+    public function getEdit($isadmin, $userid, $commid, $htmlcomment)
     {
+        $update = $this->setUrlCreator("comm/update");
         if ($isadmin || $userid == $this->sess['id']) {
             $edit = '<p><a href="' . $update . '/' . $commid . '">Redigera</a> | ';
             $edit .= $htmlcomment;
@@ -227,19 +228,18 @@ class ShowOneService
     {
         $isadmin = $this->sess['isadmin'] == 1 ? true : false;
 
-        $update = $this->setUrlCreator("comm/update");
         $del = $this->setUrlCreator("comm/delete");
         $commpage = $this->setUrlCreator("comm");
         
         $htmlcomment = $this->getLoginurl();
-        $edit = $this->getEdit($isadmin, $this->comment->userid, $update, $this->comment->id, $htmlcomment);
+        $edit = $this->getEdit($isadmin, $this->comment->userid, $this->comment->id, $htmlcomment);
         $delete = $this->getDelete($isadmin, $this->comment->userid, $del, $this->comment->id);
 
         $text = '<h3>Kommentarer</h3>';
 
         if ($this->comments) {
             foreach ($this->comments as $value) {
-                $can = $this->getCanEdit($value, $isadmin, $update, $del);
+                $can = $this->getCanEdit($value, $isadmin, $del);
                 $text .= $this->getValHtml($value, $can);
             }
         }

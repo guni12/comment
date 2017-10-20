@@ -37,47 +37,14 @@ class UpdateCommForm extends FormModel
     public function aForm($id, $sessid, $comm, $comt)
     {
         $this->form->create(
-            [
-                "id" => __CLASS__,
-                "legend" => "Uppdatera ditt konto",
-            ],
-            [
-                "sessid" => [
-                    "type"  => "hidden",
-                    "value" => $sessid,
-                ],
-
-                "id" => [
-                    "type"  => "hidden",
-                    "value" => $id,
-                ],
-
-                "parentid" => [
-                    "type"  => "hidden",
-                    "value" => $comm->parentid,
-                ],
-
-                "title" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                    "value" => $comm->title,
-                ],
-
-                "comment" => [
-                    "type" => "textarea",
-                    "validation" => ["not_empty"],
-                    "value" => $comt,
-                ],
-
-                "submit" => [
-                    "type" => "submit",
-                    "value" => "Spara",
-                    "callback" => [$this, "callbackSubmit"]
-                ],
-
-                "reset" => [
-                    "type"      => "reset",
-                ],
+            ["id" => __CLASS__, "legend" => "Uppdatera ditt konto"],
+            [   "sessid" => ["type"  => "hidden", "value" => $sessid],
+                "id" => ["type"  => "hidden", "value" => $id],
+                "parentid" => ["type"  => "hidden", "value" => $comm->parentid],
+                "title" => ["type" => "text", "validation" => ["not_empty"], "value" => $comm->title],
+                "comment" => ["type" => "textarea", "validation" => ["not_empty"], "value" => $comt],
+                "submit" => ["type" => "submit", "value" => "Spara", "callback" => [$this, "callbackSubmit"]],
+                "reset" => ["type"      => "reset"],
             ]
         );
     }

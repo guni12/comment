@@ -30,38 +30,13 @@ class CreateCommForm extends FormModel
     public function aForm($id, $parentid)
     {
         $this->form->create(
+            ["id" => __CLASS__, "legend" => "Gör ett inlägg",],
             [
-                "id" => __CLASS__,
-                "legend" => "Gör ett inlägg",
-            ],
-            [
-                "title" => [
-                    "type"  => "text",
-                    "label" => "Titel",
-                    "validation" => ["not_empty"],
-                ],
-
-                "id" => [
-                    "type"  => "hidden",
-                    "value" => $id,
-                ],
-
-                "parentid" => [
-                    "type"  => "hidden",
-                    "value" => $parentid,
-                ],
-
-                "comment" => [
-                    "type"  => "textarea",
-                    "label" => "Text",
-                    "validation" => ["not_empty"],
-                ],
-
-                "submit" => [
-                    "type" => "submit",
-                    "value" => "Spara",
-                    "callback" => [$this, "callbackSubmit"]
-                ],
+                "title" => ["type"  => "text", "label" => "Titel","validation" => ["not_empty"]],
+                "id" => ["type"  => "hidden", "value" => $id],
+                "parentid" => ["type"  => "hidden", "value" => $parentid],
+                "comment" => ["type"  => "textarea","label" => "Text","validation" => ["not_empty"]],
+                "submit" => ["type" => "submit", "value" => "Spara", "callback" => [$this, "callbackSubmit"]],
             ]
         );
     }
