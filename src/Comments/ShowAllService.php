@@ -125,7 +125,7 @@ class ShowAllService
      *
      * @return string htmlcode
      */
-    public function getValHtml($item, $isadmin, $viewone)
+    public function getValHtml(Comm $item, $isadmin, $viewone)
     {
         $gravatar = $this->getGravatar($item->email);
         $extra = $this->getExtra($item->updated);
