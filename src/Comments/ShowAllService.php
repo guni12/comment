@@ -147,9 +147,6 @@ class ShowAllService
     public function getHTML()
     {
         $loggedin = "";
-        $showid = "";
-        $gravatar = "";
-        $extra = "";
         $html = "";
 
         $isadmin = $this->sess['isadmin'] === 1 ? true : false;

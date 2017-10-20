@@ -104,9 +104,9 @@ class ShowOneService
      * @param object $item
      * @return string htmlcode
      */
-    public function getDecode($item, $lead = null)
+    public function getDecode(Comm $item, $lead = null)
     {
-        $comt = json_decode($item);
+        $comt = json_decode($item->comment);
         if ($comt->frontmatter->title) {
             $til = $comt->frontmatter->title;
         } else {
@@ -128,7 +128,7 @@ class ShowOneService
      * @param string $del
      * @return string htmlcode
      */
-    public function getCanEdit($item, $isadmin, $update, $del)
+    public function getCanEdit(Comm $item, $isadmin, $update, $del)
     {
         $canedit = "";
         if ($item->userid == $this->sess['id'] || $isadmin) {
@@ -204,12 +204,12 @@ class ShowOneService
      *
      * @return string htmlcod
      */
-    public function getValHtml($item, $can)
+    public function getValHtml(Comm $item, $can)
     {
         $gravatar = $this->getGravatar($item->email);
         $updated = isset($item->updated) ? '| Uppdaterades: ' . $item->updated : "";
         
-        $text = $this->getDecode($item->comment);
+        $text = $this->getDecode($item);
         $text .= '<p><span class="smaller">' . $item->email . '</span> ' . $gravatar . '<br />';
         $text .= 'Skrevs: ' . $item->created . ' ' . $updated;
         $text .= $can;
@@ -245,7 +245,7 @@ class ShowOneService
         }
 
         $html = '<div class="col-sm-12 col-xs-12"><div class="col-lg-4 col-sm-7 col-xs-7 abookimg">';
-        $html .= $this->getDecode($this->comment->comment, true);
+        $html .= $this->getDecode($this->comment, true);
         $html .= '<br />' . $edit;
         $html .=  $delete;
         $html .=  '<p><a href="' . $commpage . '">Till Alla Inläggen</a></p>';
