@@ -42,8 +42,6 @@ return [
                 $url->setStaticSiteUrl($request->getSiteUrl());
                 $url->setStaticBaseUrl($request->getBaseUrl());
                 $url->setScriptName($request->getScriptName());
-                //$url->configure("url.php");
-                //$url->setDefaultsFromConfiguration();
                 return $url;
             }
         ],
@@ -87,7 +85,7 @@ return [
         "userController" => [
             "shared" => true,
             "callback" => function () {
-                $obj = new \Guni\User\UserController();
+                $obj = new \Anax\User\UserController();
                 $obj->setDI($this);
                 return $obj;
             }

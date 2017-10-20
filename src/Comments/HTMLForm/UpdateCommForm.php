@@ -86,7 +86,6 @@ class UpdateCommForm extends FormModel
         $comm = new Comm();
         $comm->setDb($this->di->get("db"));
         $comm->find("id", $id);
-        //var_dump($user->isadmin);
         return $comm;
     }
 

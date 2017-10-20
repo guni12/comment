@@ -43,7 +43,7 @@ class ShowOneService
      *
      * @param integer $id get details on item with id.
      *
-     * @return Book
+     * @return Comm
      */
     public function getItemDetails($id)
     {
@@ -57,9 +57,10 @@ class ShowOneService
         /**
      * Get details on item to load form with.
      *
-     * @param integer $id get details on item with id.
+     * @param string $where
+     * @param array $params get details on item with id parentid.
      *
-     * @return Book
+     * @return Comm
      */
     public function getParentDetails($where, $params)
     {
@@ -83,6 +84,12 @@ class ShowOneService
     }
 
 
+    /**
+     * Returns link for gravatar img
+     *
+     * @param object $item
+     * @return string htmlcode
+     */
     public function getGravatar($item)
     {
         $comm = new Comm();
@@ -91,6 +98,12 @@ class ShowOneService
     }
 
 
+    /**
+     * Returns json_decoded title and text
+     * If lead text, headline is larger font
+     * @param object $item
+     * @return string htmlcode
+     */
     public function getDecode($item, $lead = null)
     {
         $comt = json_decode($item);
@@ -107,6 +120,14 @@ class ShowOneService
     }
 
 
+    /**
+     * If param met, returns string with edit-links
+     * @param boolean $isadmin
+     * @param object $item
+     * @param string $update
+     * @param string $del
+     * @return string htmlcode
+     */
     public function getCanEdit($item, $isadmin, $update, $del)
     {
         $canedit = "";
@@ -119,6 +140,12 @@ class ShowOneService
         return $canedit;
     }
 
+
+    /**
+     * If session contains correct id, returns string with edit-links
+     *
+     * @return string htmlcode
+     */
     public function getLoginurl()
     {
         $loginurl = $this->setUrlCreator("user/login");
@@ -133,6 +160,11 @@ class ShowOneService
     }
 
 
+    /**
+     * Returns all text for the view
+     *
+     * @return string htmlcode
+     */
     public function getHTML()
     {
         $isadmin = (int)$this->sess['isadmin'] > 0 ? $this->sess['isadmin'] : null;

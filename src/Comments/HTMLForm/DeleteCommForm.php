@@ -76,25 +76,20 @@ class DeleteCommForm extends FormModel
         $comm = new Comm();
         $comm->setDb($this->di->get("db"));
 
-        //echo "<br />" . $this->form->value("commid") . " Testar" . "<br />";
-
         $all = $comm->findAll();
         $objects = "";
 
         foreach ($all as $obj) {
             if ($obj->parentid && $obj->parentid == $this->form->value("id")) {
-                //echo 'Ja: ' . $obj->parentid . ' kastar ' . $obj->id . '<br />';
                 $comm->find("id", $obj->id);
                 $objects .= $comm->title . ", ";
                 $comm->delete();
             }
         }
 
-        //echo "Kastar id: " . $this->form->value("id");
         $comm->find("id", $this->form->value("id"));
         $objects .= $comm->title;
         $comm->delete();
-        //$this->form->addOutput($objects . ": kastats.");
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm");
     }

@@ -74,10 +74,7 @@ class CreateCommForm extends FormModel
         $parses = ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"];
         $comment = $textfilter->parse($this->form->value("comment"), $parses);
         $comment->frontmatter['title'] = $this->form->value("title");
-        //var_dump($comment);
         $comment = json_encode($comment);
-
-        //var_dump($comment);
 
         $now = date("Y-m-d H:i:s");
 
@@ -90,7 +87,7 @@ class CreateCommForm extends FormModel
         $comm->email = $userdetails["email"];
         $comm->created = $now;
         $comm->save();
-        //$this->form->addOutput($comm->title . ": skapad.");
+
         $back = (int)$this->form->value("parentid") > 0 ? "/view-one/" . $this->form->value("parentid") : "";
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm" . $back);

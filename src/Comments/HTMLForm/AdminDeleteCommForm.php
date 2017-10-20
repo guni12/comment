@@ -90,7 +90,7 @@ class AdminDeleteCommForm extends FormModel
         $titles = $objects . $comm->title;
         $comm->delete();
         $this->form->addOutput($titles . ": kastad.");
-        //$this->response->redirect($this->url->create($url));
+
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm");
     }

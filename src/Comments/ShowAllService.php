@@ -37,10 +37,9 @@ class ShowAllService
     }
 
     /**
-     * Get details on comments.
+     * Get details on all comments.
      *
-     *
-     * @return All comments
+     * @return Comm
      */
     public function getAll()
     {
@@ -64,6 +63,13 @@ class ShowAllService
     }
 
 
+    /**
+     * Returns link for gravatar img
+     *
+     * @param object $item
+     *
+     * @return string htmlcode
+     */
     public function getGravatar($item)
     {
         $comm = new Comm();
@@ -72,6 +78,12 @@ class ShowAllService
     }
 
 
+    /**
+     * Returns text if updated
+     *
+     * @param object $item
+     * @return string htmlcode
+     */
     public function getExtra($item)
     {
         $extra = "";
@@ -82,6 +94,11 @@ class ShowAllService
     }
 
 
+    /**
+     * Returns all text for the view
+     *
+     * @return string htmlcode
+     */
     public function getHTML()
     {
         $loggedin = "";
@@ -90,7 +107,7 @@ class ShowAllService
         $extra = "";
         $html = "";
 
-        $isadmin = $this->sess['isadmin'] == 1 ? true : false;
+        $isadmin = $this->sess['isadmin'] === 1 ? true : false;
 
         $create = $this->setUrlCreator("comm/create");
         $del = $this->setUrlCreator("comm/admindelete");
@@ -100,7 +117,7 @@ class ShowAllService
 
         if ($this->sess['id']) {
             $loggedin = ' <a href="' . $create .'">Skriv ett inlägg</a>';
-            if ($isadmin == true) {
+            if ($isadmin === true) {
                 $loggedin .= ' | <a href="' . $del . '">Ta bort ett inlägg</a>';
             }
         }
@@ -117,7 +134,7 @@ class ShowAllService
             }
             $gravatar = $this->getGravatar($value->email);
             $extra = $this->getExtra($value->updated);
-            if ($isadmin == true) {
+            if ($isadmin === true) {
                 $showid = '(' . $value->id . '): ';
             }
             $html .= '<h4><a href="' . $viewone . '/' . $value->id . '">';
