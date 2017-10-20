@@ -161,13 +161,70 @@ class ShowOneService
 
 
     /**
+     * If loggedin allowed to edit
+     *
+     * @param boolean $isadmin
+     * @param string $userid
+     * @param string $update, link
+     * @param string $htmlcomment, link
+     *
+     * @return string htmlcode
+     */
+    public function getEdit($isadmin, $userid, $update, $commid, $htmlcomment)
+    {
+        if ($isadmin || $userid == $this->sess['id']) {
+            $edit = '<p><a href="' . $update . '/' . $commid . '">Redigera</a> | ';
+            $edit .= $htmlcomment;
+        } else {
+            $edit = "<p>" . $htmlcomment . "</p>";
+        }
+        return $edit;
+    }
+
+
+    /**
+     * If session contains correct id, returns string with edit-links
+     *
+     * @return string htmlcode
+     */
+    public function getDelete($isadmin, $userid, $del, $commid)
+    {
+        if ($isadmin || $userid == $this->sess['id']) {
+            $delete = ' | <a href="' .  $del . '/' . $commid . '">Ta bort inlägget</a></p>';
+        }
+        return $delete;
+    }
+
+
+    /**
+     * Returns html for each item
+     *
+     * @param object $item
+     * @param string $can
+     *
+     * @return string htmlcod
+     */
+    public function getValHtml($item, $can)
+    {
+        $gravatar = $this->getGravatar($item->email);
+        $updated = isset($item->updated) ? '| Uppdaterades: ' . $item->updated : "";
+        
+        $text = $this->getDecode($item->comment);
+        $text .= '<p><span class="smaller">' . $item->email . '</span> ' . $gravatar . '<br />';
+        $text .= 'Skrevs: ' . $item->created . ' ' . $updated;
+        $text .= $can;
+        $text .= '<hr />';
+        return $text;
+    }
+
+
+    /**
      * Returns all text for the view
      *
      * @return string htmlcode
      */
     public function getHTML()
     {
-        $isadmin = (int)$this->sess['isadmin'] > 0 ? $this->sess['isadmin'] : null;
         $isadmin = $this->sess['isadmin'] == 1 ? true : false;
 
         $update = $this->setUrlCreator("comm/update");
@@ -175,35 +232,17 @@ class ShowOneService
         $commpage = $this->setUrlCreator("comm");
         
         $htmlcomment = $this->getLoginurl();
-        $edit = "";
-        $delete = "";
-        
-
-        if ($isadmin || $this->comment->userid == $this->sess['id']) {
-            $edit = '<p><a href="' . $update . '/' . $this->comment->id . '">Redigera</a> | ';
-            $edit .= $htmlcomment;
-            
-            $delete = ' | <a href="' .  $del . '/' . $this->comment->id . '">Ta bort inlägget</a></p>';
-        } else {
-            $edit = "<p>" . $htmlcomment . "</p>";
-        }
+        $edit = $this->getEdit($isadmin, $this->comment->userid, $update, $this->comment->id, $htmlcomment);
+        $delete = $this->getDelete($isadmin, $this->comment->userid, $del, $this->comment->id);
 
         $text = '<h3>Kommentarer</h3>';
 
         if ($this->comments) {
             foreach ($this->comments as $value) {
                 $can = $this->getCanEdit($value, $isadmin, $update, $del);
-                $gravatar = $this->getGravatar($value->email);
-                $updated = isset($value->updated) ? '| Uppdaterades: ' . $value->updated : "";
-                
-                $text .= $this->getDecode($value->comment);
-                $text .= '<p><span class="smaller">' . $value->email . '</span> ' . $gravatar . '<br />';
-                $text .= 'Skrevs: ' . $value->created . ' ' . $updated;
-                $text .= $can;
-                $text .= '<hr />';
+                $text .= $this->getValHtml($value, $can);
             }
         }
-
 
         $html = '<div class="col-sm-12 col-xs-12"><div class="col-lg-4 col-sm-7 col-xs-7 abookimg">';
         $html .= $this->getDecode($this->comment->comment, true);

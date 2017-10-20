@@ -18,8 +18,17 @@ class CreateCommForm extends FormModel
      */
     public function __construct(DIInterface $di, $id, $parentid = null)
     {
-        //echo "parentid: " . $parentid;
         parent::__construct($di);
+        $this->aForm($id, $parentid);
+    }
+
+
+    /**
+     * Create the form.
+     *
+     */
+    public function aForm($id, $parentid)
+    {
         $this->form->create(
             [
                 "id" => __CLASS__,

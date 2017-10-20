@@ -95,6 +95,51 @@ class ShowAllService
 
 
     /**
+     * Returns correct loginlink
+     *
+     * @param boolean $isadmin
+     * @param string $create
+     * @param string $del
+     *
+     * @return string htmlcode
+     */
+    public function getLoginLink($isadmin, $create, $del)
+    {
+        $loggedin = '<a href="user/login">Logga in om du vill kommentera</a>';
+        if ($this->sess['id']) {
+            $loggedin = ' <a href="' . $create .'">Skriv ett inlägg</a>';
+            if ($isadmin === true) {
+                $loggedin .= ' | <a href="' . $del . '">Ta bort ett inlägg</a>';
+            }
+        }
+        return $loggedin;
+    }
+
+
+    /**
+     * Returns html for each item
+     *
+     * @param object $item
+     * @param boolean $isadmin
+     * @param string $viewone
+     *
+     * @return string htmlcode
+     */
+    public function getValHtml($item, $isadmin, $viewone)
+    {
+        $gravatar = $this->getGravatar($item->email);
+        $extra = $this->getExtra($item->updated);
+        if ($isadmin === true) {
+            $showid = '(' . $item->id . '): ';
+        }
+        $html = '<h4><a href="' . $viewone . '/' . $item->id . '">';
+        $html .= $showid . ' ' . $item->title . '</a></h4><p>';
+        $html .= $item->created . ' ' . $item->email . ' ' . $gravatar . ' ' . $extra . '</p><hr />';
+        return $html;
+    }
+
+
+    /**
      * Returns all text for the view
      *
      * @return string htmlcode
@@ -113,15 +158,7 @@ class ShowAllService
         $del = $this->setUrlCreator("comm/admindelete");
         $viewone = $this->setUrlCreator("comm/view-one");
 
-        $loggedin = '<a href="user/login">Logga in om du vill kommentera</a>';
-
-        if ($this->sess['id']) {
-            $loggedin = ' <a href="' . $create .'">Skriv ett inlägg</a>';
-            if ($isadmin === true) {
-                $loggedin .= ' | <a href="' . $del . '">Ta bort ett inlägg</a>';
-            }
-        }
-
+        $loggedin = $this->getLoginLink($isadmin, $create, $del);
 
         $html .= '<div class="col-sm-12 col-xs-12">
         <div class="col-lg-6 col-sm-7 col-xs-7">
@@ -132,14 +169,7 @@ class ShowAllService
             if ((int)$value->parentid > 0) {
                 continue;
             }
-            $gravatar = $this->getGravatar($value->email);
-            $extra = $this->getExtra($value->updated);
-            if ($isadmin === true) {
-                $showid = '(' . $value->id . '): ';
-            }
-            $html .= '<h4><a href="' . $viewone . '/' . $value->id . '">';
-            $html .= $showid . ' ' . $value->title . '</a></h4><p>';
-            $html .= $value->created . ' ' . $value->email . ' ' . $gravatar . ' ' . $extra . '</p><hr />';
+            $html .= $this->getValHtml($value, $isadmin, $viewone);
         }
         
         $html .= '</div></div>';

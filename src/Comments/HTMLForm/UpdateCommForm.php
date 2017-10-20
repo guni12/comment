@@ -27,6 +27,15 @@ class UpdateCommForm extends FormModel
         $comt = $textfilter->parse($toparse->text, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
         $comt = strip_tags($comt->text);
 
+        $this->aForm($id, $sessid, $comm, $comt);
+    }
+
+    /**
+     * Create the form.
+     *
+     */
+    public function aForm($id, $sessid, $comm, $comt)
+    {
         $this->form->create(
             [
                 "id" => __CLASS__,
@@ -74,12 +83,13 @@ class UpdateCommForm extends FormModel
     }
 
 
+
     /**
      * Get details on item to load form with.
      *
      * @param integer $id get details on item with id.
      *
-     * @return User
+     * @return Comm
      */
     public function getCommDetails($id)
     {
@@ -127,5 +137,7 @@ class UpdateCommForm extends FormModel
 
         $pagerender = $this->di->get("pageRender");
         $pagerender->redirect("comm" . $back);
+
+        return true;
     }
 }

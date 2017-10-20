@@ -24,11 +24,21 @@ class CommController implements
         InjectionAwareTrait;
 
 
-
     /**
-     * @var $data description
+     * Sends data to view
+     *
+     * @param string $title
+     * @param string $crud, path to view
+     * @param array $data, htmlcontent to view
      */
-    //private $data;
+    public function toRender($title, $crud, $data)
+    {
+        $view       = $this->di->get("view");
+        $pageRender = $this->di->get("pageRender");
+        $view->add($crud, $data);
+        $tempfix = "";
+        $pageRender->renderPage($tempfix, ["title" => $title]);
+    }
 
 
     /**
@@ -39,19 +49,15 @@ class CommController implements
     public function getIndex()
     {
         $title      = "Inlägg";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-
-        $tempfix = "";
 
         $text = new ShowAllService($this->di);
 
         $data = [
             "items" => $text->getHTML(),
         ];
-        $view->add("comm/crud/front", $data);
-        
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+
+        $crud = "comm/crud/front";
+        $this->toRender($title, $crud, $data);
     }
 
 
@@ -64,8 +70,6 @@ class CommController implements
     public function getPostCreateItem($id = null)
     {
         $title      = "Skriv ett inlägg";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
 
         $session = $this->di->get("session");
         $sess = $session->get("user");
@@ -83,12 +87,9 @@ class CommController implements
             ];
         }
 
-        $view->add("comm/crud/create", $data);
-        $tempfix = "";
-
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+        $crud = "comm/crud/create";
+        $this->toRender($title, $crud, $data);
     }
-
 
 
     /**
@@ -99,8 +100,6 @@ class CommController implements
     public function getPostDeleteItem($id)
     {
         $title      = "Ta bort ett inlägg";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
 
         $session = $this->di->get("session");
         $sess = $session->get("user");
@@ -118,10 +117,8 @@ class CommController implements
             ];
         }
 
-        $view->add("comm/crud/delete", $data);
-        $tempfix = "";
-
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+        $crud = "comm/crud/delete";
+        $this->toRender($title, $crud, $data);
     }
 
 
@@ -134,8 +131,6 @@ class CommController implements
     public function getPostAdminDeleteItem()
     {
         $title      = "Ta bort text";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
         $form       = new AdminDeleteCommForm($this->di);
 
         $form->check();
@@ -144,10 +139,8 @@ class CommController implements
             "form" => $form->getHTML(),
         ];
 
-        $view->add("comm/crud/admindelete", $data);
-        $tempfix = "";
-
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+        $crud = "comm/crud/admindelete";
+        $this->toRender($title, $crud, $data);
     }
 
 
@@ -160,8 +153,6 @@ class CommController implements
     public function getPostUpdateItem($id)
     {
         $title      = "Uppdatera ditt inlägg";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
 
         $session = $this->di->get("session");
         $sess = $session->get("user");
@@ -179,10 +170,8 @@ class CommController implements
             ];
         }
 
-        $view->add("comm/crud/update", $data);
-        $tempfix = "";
-
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+        $crud = "comm/crud/update";
+        $this->toRender($title, $crud, $data);
     }
 
 
@@ -194,17 +183,13 @@ class CommController implements
     public function getPostShow($id)
     {
         $title      = "Inlägg";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
         $text       = new ShowOneService($this->di, $id);
 
         $data = [
             "items" => $text->getHTML(),
         ];
 
-        $view->add("comm/crud/view-one", $data);
-        $tempfix = "";
-
-        $pageRender->renderPage($tempfix, ["title" => $title]);
+        $crud = "comm/crud/view-one";
+        $this->toRender($title, $crud, $data);
     }
 }
