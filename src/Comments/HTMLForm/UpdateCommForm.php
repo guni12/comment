@@ -18,7 +18,7 @@ class UpdateCommForm extends FormModel
      * @param integer             $id to update
      */
     public function __construct(DIInterface $di, $id, $sessid)
-    {        
+    {
         parent::__construct($di);
         $comm = $this->getCommDetails($id);
 
@@ -30,7 +30,7 @@ class UpdateCommForm extends FormModel
     /**
     * Converts json-string back to variables
     *
-    * @param json $fromjson the jsoncode
+    * @param string $fromjson the jsoncode
     * @return the extracted comment-text
     */
     public function decode($fromjson)
