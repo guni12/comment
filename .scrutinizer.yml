@@ -8,15 +8,13 @@ build:
 
     dependencies:
         before:
-            - "mkdir build"
-
-        after:
-            - "composer require --dev phpunit/phpunit"
+            -
+                command: "mkdir build"
 
     tests:
         override:
             -
-                command: "vendor/bin/phpunit --configuration .phpunit.xml"
+                command: "phpunit --configuration .phpunit.xml"
                 coverage:
                     file: "build/coverage.clover"
                     format: "php-clover"
