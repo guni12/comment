@@ -46,7 +46,7 @@ class ShowOneServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('email', $item);
 
         $img = $commOne->getGravatar($item->email);
-        $shouldbe = '<img src="https://www.gravatar.com/avatar/76244599cf35c54be93d61ef551adbe8?s=20&d=mm&r=g" alt=""/>';
+        $shouldbe = '<img src="https://www.gravatar.com/avatar/5c2ae1f9ee8c57a59ab2735bfd9797de?s=20&d=mm&r=g" alt=""/>';
         $this->assertEquals($shouldbe, $img);
 
         $isadmin = 1;

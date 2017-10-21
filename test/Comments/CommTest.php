@@ -36,7 +36,7 @@ class CommTest extends \PHPUnit_Framework_TestCase
         $titel = "Tom";
         $text = "Array";
         $val = $res2;
-        include("/../../htdocs/incl/renderPage.php");
+        //include("/../../htdocs/incl/renderPage.php");
     }
 
 
@@ -64,7 +64,7 @@ class CommTest extends \PHPUnit_Framework_TestCase
         $res3 = $this->setObjectVars($res2, $arr);
         $title = "Nya tag";
         $val = $res3;
-        include("/../../htdocs/incl/renderPage.php");
+        //include("/../../htdocs/incl/renderPage.php");
     }
 
     public function insert()
@@ -93,4 +93,3 @@ class CommTest extends \PHPUnit_Framework_TestCase
         $comm->save();
     }
 }
-

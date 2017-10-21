@@ -34,6 +34,6 @@ class UpdateCommFormTest extends \PHPUnit_Framework_TestCase
         $text = $commForm->decode($val->comment);
         $title = "Testar update";
         $res2 = $commForm->aForm($id, $sessid, $val, $text);
-        include("/../../../htdocs/incl/renderPage.php");
+        //include("/../../../htdocs/incl/renderPage.php");
     }
 }
