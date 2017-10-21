@@ -82,13 +82,5 @@ return [
                 return $obj;
             }
         ],
-        "userController" => [
-            "shared" => true,
-            "callback" => function () {
-                $obj = new \Anax\User\UserController();
-                $obj->setDI($this);
-                return $obj;
-            }
-        ],
     ],
 ];
