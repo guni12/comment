@@ -47,7 +47,7 @@ class AdminDeleteCommForm extends FormModel
      *
      * @return array with key value of all items.
      */
-    protected function getAllPosts()
+    public function getAllPosts()
     {
         $comm = new Comm();
         $comm->setDb($this->di->get("db"));
