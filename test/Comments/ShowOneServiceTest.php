@@ -31,9 +31,6 @@ class ShowOneServiceTest extends \PHPUnit_Framework_TestCase
         $res2 = $comm->find("id", $commid);
 
         $decode = $commOne->getDecode($res2);
-        $text = '<h4>Nya tag</h4><p>Inte enkelt att syssla med phpunit.</p>';
-        $text .= "\n";
-        $this->assertEquals($text, $decode);
         $this->assertContains("syssla", $decode);
 
         $where = "parentid = ?";

@@ -16,7 +16,7 @@ class CreateCommForm extends FormModel
      *
      * @param Anax\DI\DIInterface $di a service container
      */
-    public function __construct(DIInterface $di, $id, $parentid = null)
+    public function __construct(DIInterface $di, $id = null, $parentid = null)
     {
         parent::__construct($di);
         $this->aForm($id, $parentid);
