@@ -18,16 +18,28 @@ class UpdateCommForm extends FormModel
      * @param integer             $id to update
      */
     public function __construct(DIInterface $di, $id, $sessid)
-    {
+    {        
         parent::__construct($di);
         $comm = $this->getCommDetails($id);
-        $textfilter = $this->di->get("textfilter");
 
-        $toparse = json_decode($comm->comment);
+        $comt = $this->decode($comm->comment);
+        $this->aForm($id, $sessid, $comm, $comt);
+    }
+
+
+    /**
+    * Converts json-string back to variables
+    *
+    * @param json $fromjson the jsoncode
+    * @return the extracted comment-text
+    */
+    public function decode($fromjson)
+    {
+        $textfilter = $this->di->get("textfilter");
+        $toparse = json_decode($fromjson);
         $comt = $textfilter->parse($toparse->text, ["yamlfrontmatter", "shortcode", "markdown", "titlefromheader"]);
         $comt = strip_tags($comt->text);
-
-        $this->aForm($id, $sessid, $comm, $comt);
+        return $comt;
     }
 
     /**
