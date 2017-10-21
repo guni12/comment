@@ -8,6 +8,8 @@ Anax comment
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/guni12/comment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/guni12/comment/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/guni12/comment/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/guni12/comment/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/3ed38c6b-7853-4eb1-8702-c097833ba459/mini.png)](https://insight.sensiolabs.com/projects/3ed38c6b-7853-4eb1-8702-c097833ba459)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2faf2369720e7502efd6/maintainability)](https://codeclimate.com/github/guni12/comment/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2faf2369720e7502efd6/test_coverage)](https://codeclimate.com/github/guni12/comment/test_coverage)
 
 
 (Anax) guni12 comment module.
