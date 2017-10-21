@@ -1,5 +1,4 @@
 <?php
-
 namespace Anax\Comments;
 
 use \Anax\Database\ActiveRecordModel;
@@ -30,7 +29,7 @@ class Comm extends ActiveRecordModel
     public $updated;
 
 
-    public function getGravatar($email, $img = false, $atts = array())
+    public function getGravatar($email)
     {
         $size = 20;
         $dim = 'mm';
@@ -38,13 +37,6 @@ class Comm extends ActiveRecordModel
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
         $url .= "?s=$size&d=$dim&r=$rad";
-        if ($img) {
-            $url = '<img src="' . $url . '"';
-            foreach ($atts as $key => $val) {
-                $url .= ' ' . $key . '="' . $val . '"';
-            }
-            $url .= ' />';
-        }
         return $url;
     }
 }
