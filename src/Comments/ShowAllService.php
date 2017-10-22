@@ -127,6 +127,7 @@ class ShowAllService
      */
     public function getValHtml(Comm $item, $isadmin, $viewone)
     {
+        $showid = "";
         $gravatar = $this->getGravatar($item->email);
         $extra = $this->getExtra($item->updated);
         if ($isadmin === true) {

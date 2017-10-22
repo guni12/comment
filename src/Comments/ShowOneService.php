@@ -190,6 +190,7 @@ class ShowOneService
      */
     public function getDelete($isadmin, $userid, $del, $commid)
     {
+        $delete = "";
         if ($isadmin || $userid == $this->sess['id']) {
             $delete = ' | <a href="' .  $del . '/' . $commid . '">Ta bort inlägget</a></p>';
         }
